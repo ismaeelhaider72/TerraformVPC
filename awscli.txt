@@ -1,0 +1,46 @@
+pipeline {
+  agent any
+    
+  stages {
+        
+    stage('Build') {
+      steps {
+        sh 'npm install'
+         sh 'tar czf Node.tar.gz node_modules index.js package.json'
+      }
+    }  
+    
+    stage('Deploy') {
+      steps {
+        sshPublisher(publishers: [sshPublisherDesc(configName: 'ismaeelTesting', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''sudo rm -r /var/www/
+        sudo pkill node
+        tar -xf  /home/ubuntu/test/Node.tar.gz
+        node index.js > app.out.log 2> app.err.log < /dev/null & ''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/test/', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/*.gz ')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+
+        
+      }
+    } 
+    
+    
+  }
+}
+
+
+
+
+aEQ/ujeKzjHeQ+ka+OBQ7nW6koDr5tL3eFAyVhjI   --> secret access key
+AKIAXEFPMSBJD5UHH4HI --> access key
+
+
+
+
+
+aws cloudformation create-stack --stack-name ismaeelawsclitest1 --template-body file://Rootismaeelstack.yml --region 'us-east-1' --parameters ParameterKey=ImageId,ParameterValue=ami-077e31c4939f6a2f3 ParameterKey=MyKeyName,ParameterValue=ismaeelhaiderUbenterPCKey ParameterKey=InstanceType,ParameterValue=t2.micro ParameterKey=MyBucketName,ParameterValue=ismaeels3bucketfornestedstack   ParameterKey=PrivateSubnet1CIDR,ParameterValue=10.0.2.0/24  ParameterKey=PublicSubnet1CIDR,ParameterValue=10.0.1.0/24 ParameterKey=PublicSubnet2CIDR,ParameterValue=10.0.3.0/24 ParameterKey=VpcCIDR,ParameterValue=10.0.0.0/16 
+
+                                                                                                                                    ParameterKey=Parm1,ParameterValue=test1
+
+aws cloudformation create-stack --stack-name s3bucket --template-body file://Rootismaeelstack.yml --region 'us-east-1 --parameters ami-077e31c4939f6a2f3 t2.micro ismaeels3bucketfornestedstack ismaeelhaiderUbenterPCKey 10.0.2.0/24 10.0.1.0/24 10.0.3.0/24 0.0.0.0/16 
+
+
+
+aws cloudformation create-stack --stack-name ismaeelawsclitest2 --template-body file://Rootismaeelstack.yml --region 'us-east-1' --parameters ParameterKey=ImageId,ParameterValue=ami-077e31c4939f6a2f3 ParameterKey=MyKeyName,ParameterValue=ismaeelhaiderUbunterPCKey ParameterKey=InstanceType,ParameterValue=t2.micro ParameterKey=MyBucketName,ParameterValue=ismaeels3bucketfornestedstack   ParameterKey=PrivateSubnet1CIDR,ParameterValue=10.0.2.0/24  ParameterKey=PublicSubnet1CIDR,ParameterValue=10.0.1.0/24 ParameterKey=PublicSubnet2CIDR,ParameterValue=10.0.3.0/24 ParameterKey=VpcCIDR,ParameterValue=10.0.0.0/16
