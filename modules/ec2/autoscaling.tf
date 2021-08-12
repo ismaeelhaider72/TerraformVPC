@@ -38,7 +38,7 @@ resource "aws_autoscaling_group" "autoscalling_group_config" {
 #  health_check_type = "EC2"
   desired_capacity = 3
   force_delete = true
-  vpc_zone_identifier = ["${var.subnet_id1}","${var.subnet_id2}"]
+  vpc_zone_identifier = ["${var.public_subnet_id1}","${var.public_subnet_id2}"]
   launch_configuration = aws_launch_configuration.launch-configuration.name
  
   lifecycle {
@@ -63,3 +63,4 @@ resource "aws_autoscaling_attachment" "asg_attachment_bar" {
   autoscaling_group_name = aws_autoscaling_group.autoscalling_group_config.id
   alb_target_group_arn   = aws_lb_target_group.blue.arn
 }
+
