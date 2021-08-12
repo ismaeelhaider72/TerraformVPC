@@ -2,7 +2,7 @@ resource "aws_lb" "app" {
   name               = "mainapplb"  
   internal           = false  
   load_balancer_type = "application" 
-  subnets            = ["${var.subnet_id1}","${var.subnet_id2}"]
+  subnets            = ["${var.public_subnet_id1}","${var.public_subnet_id2}"]
   security_groups    = [aws_security_group.elb-securitygroup.id]
 
 
