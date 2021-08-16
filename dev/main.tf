@@ -23,6 +23,7 @@ module "my_ec2" {
   public_subnet_id2     = "${module.my_vpc.subnet_id2}"
   vpc_id         = "${module.my_vpc.vpc_id}"
   private_subnet_id   =  "${module.my_vpc.private_subnet_id1}"
+  dbpassword = "${var.dbpassword}"
 
 }
 
