@@ -53,7 +53,7 @@ resource"aws_launch_configuration" "launch-configuration" {
   image_id = "${var.ami_id}"
   instance_type = "${var.instance_type}"
   key_name = "ismaeelkeypair"
-  security_groups = [aws_security_group.allow-ssh.id]
+  security_groups = [aws_security_group.web_server_with_loadbalancer.id]
   user_data = data.template_cloudinit_config.config.rendered
                   
 }
