@@ -1,4 +1,4 @@
-resource "aws_security_group" "allow-ssh" {
+resource "aws_security_group" "web_server_with_loadbalancer" {
   vpc_id      = "${var.vpc_id}"
   name        = "allow-ssh"
   description = "security group that allows ssh and all egress traffic"
@@ -34,27 +34,27 @@ resource "aws_security_group" "allow-ssh" {
 
 
 
-resource "aws_security_group" "elb-securitygroup" {
-  vpc_id      = "${var.vpc_id}"
-  name        = "elb"
-  description = "security group for load balancer"
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+# resource "aws_security_group" "elb-securitygroup" {
+#   vpc_id      = "${var.vpc_id}"
+#   name        = "elb"
+#   description = "security group for load balancer"
+#   egress {
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
 
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  tags = {
-    Name = "elb"
-  }
-}
+#   ingress {
+#     from_port   = 80
+#     to_port     = 80
+#     protocol    = "tcp"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+#   tags = {
+#     Name = "elb"
+#   }
+# }
 
 
 
