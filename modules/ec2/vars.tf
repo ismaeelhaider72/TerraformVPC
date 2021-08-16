@@ -18,7 +18,6 @@ variable "dbusername" {
 
 
 variable "dbpassword" {
-  default = "qniwHfNH;1Tl12"
 }
 
 
