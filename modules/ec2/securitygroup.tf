@@ -82,7 +82,8 @@ resource "aws_security_group" "db-securitygroup" {
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = ["WbserverPublicIpAddress"]
+    #cidr_blocks = ["0.0.0.0/0"]
+    security_groups = [aws_security_group.web_server_with_loadbalancer.id]
   }
   tags = {
     Name = "dbsg"
